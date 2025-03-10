@@ -1,175 +1,84 @@
-/* Advanced CSS Example for GitHub Pages Website */
+/* ... (previous CSS code - CSS Variables, body, header, main, footer styles) ... */
 
-/* CSS Variables for Theming - Reusable Colors and Spacing */
-:root {
-  --primary-color: #007BFF;        /* Main brand color (blue) */
-  --primary-color-darker: #0056b3; /* Darker shade of primary color */
-  --secondary-color: #6c757d;      /* Secondary color (gray) */
-  --background-color: #f8f9fa;     /* Light background color */
-  --text-color-dark: #343a40;       /* Dark text color */
-  --text-color-light: #666;        /* Lighter text color */
-  --accent-color: #ffc107;         /* Accent color (yellow/amber) */
-  --base-font-size: 16px;          /* Base font size for the whole site */
-  --heading-font-size: 2.2em;       /* Larger font size for headings */
-  --spacing-unit: 1.5rem;          /* Base spacing unit */
+/* --- Colored Squares Styles --- */
+.colored-squares-section {
+    margin-bottom: var(--spacing-unit);
+    padding: var(--spacing-unit);
+    background-color: white;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Reset default browser styles for better consistency */
-*, *::before, *::after {
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
-  margin: 0;
-  padding: 0;
+.squares-container {
+    display: flex; /* Use flexbox to arrange squares horizontally */
+    justify-content: space-around; /* Distribute space evenly */
+    align-items: center; /* Vertically align items in the center */
+    margin-bottom: var(--spacing-unit);
 }
 
-body {
-  font-family: 'Roboto', sans-serif; /* Modern sans-serif font (consider linking to Google Fonts in HTML) */
-  font-size: var(--base-font-size);
-  background-color: var(--background-color);
-  color: var(--text-color-dark);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased; /* Improve font rendering on macOS/iOS */
+.square {
+    width: 80px;      /* Set square width */
+    height: 80px;     /* Set square height (equal to width for a square) */
+    border-radius: 10px; /* Slightly rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
-.container {
-  max-width: 1200px; /* Wider container for larger screens */
-  margin: 0 auto;
-  padding: var(--spacing-unit);
+/* Different square colors - you can customize these */
+.square-blue {
+    background-color: #007BFF;
 }
 
-/* Header Styling with Flexbox for Layout */
+.square-red {
+    background-color: #DC3545;
+}
+
+.square-green {
+    background-color: #28A745;
+}
+
+.square-yellow {
+    background-color: #FFC107;
+}
+
+/* --- Interactive Scrolling Effects --- */
+
+/* 2a. Sticky Header (Basic) */
 header {
-  background-color: white;
-  padding: var(--spacing-unit);
-  border-bottom: 1px solid #eee;
-  display: flex; /* Enable Flexbox layout */
-  justify-content: space-between; /* Distribute space between header elements */
-  align-items: center; /* Vertically align items in the center */
+    /* ... (existing header styles) ... */
+    position: sticky; /* Make header sticky */
+    top: 0;          /* Stick to the top of the viewport */
+    z-index: 100;     /* Ensure it's above other content if needed */
 }
 
-header h1 {
-  font-size: var(--heading-font-size);
-  color: var(--primary-color);
+/* 2b. Parallax Background (Simple Example - apply to body or a section) */
+body {
+    /* ... (existing body styles) ... */
+    background-image: url('images/your-background-image.jpg'); /* Replace with your image URL */
+    background-attachment: fixed; /* Fixed background for parallax effect */
+    background-size: cover;      /* Cover the entire viewport */
+    background-position: center;  /* Center the background image */
 }
 
-nav ul {
-  list-style: none;
-  display: flex; /* Flexbox for navigation links */
+/* Ensure content is readable over background - adjust as needed */
+body::before { /* Pseudo-element to add a semi-transparent overlay */
+    content: "";
+    position: fixed; /* Cover the whole viewport */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    z-index: -1; /* Place overlay behind content */
 }
 
-nav li {
-  margin-left: var(--spacing-unit);
-}
+/* 2c. Scroll-Triggered Animations (Conceptual - Requires JavaScript for real animation) */
+/*  For actual animations, you'd typically use JavaScript to detect scroll position
+    and add/remove CSS classes to elements to trigger animations.
 
-nav a {
-  color: var(--text-color-dark);
-  text-decoration: none;
-  padding: 0.5em 1em;
-  border-radius: 0.25em;
-  transition: background-color 0.3s ease; /* Smooth background color transition on hover */
-}
+    Example (Conceptual CSS - would need JS to activate):
+    .fade-in {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
 
-nav a:hover {
-  background-color: var(--primary-color-darker);
-  color: white;
-}
-
-/* Main Content Area with Grid Layout */
-main {
-  padding: var(--spacing-unit);
-  display: grid; /* Enable CSS Grid layout */
-  grid-template-columns: 3fr 1fr; /* 2-column layout: main content (3fr) and sidebar (1fr) */
-  gap: var(--spacing-unit); /* Gap between grid columns and rows */
-}
-
-article {
-  padding: var(--spacing-unit);
-  background-color: white;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
-}
-
-article h2 {
-  font-size: 1.8em;
-  color: var(--primary-color);
-  margin-bottom: 0.5em;
-}
-
-aside {
-  padding: var(--spacing-unit);
-  background-color: #f0f0f0; /* Light gray sidebar background */
-  border-radius: 0.5em;
-}
-
-aside h3 {
-  font-size: 1.4em;
-  margin-bottom: 0.75em;
-  color: var(--secondary-color);
-}
-
-/* Footer Styling */
-footer {
-  background-color: var(--text-color-dark);
-  color: white;
-  text-align: center;
-  padding: var(--spacing-unit);
-  margin-top: var(--spacing-unit);
-}
-
-/* Responsive Design using Media Queries */
-@media (max-width: 768px) { /* Styles for screens smaller than 768px (e.g., tablets) */
-  main {
-    grid-template-columns: 1fr; /* Stack columns on smaller screens (single column layout) */
-  }
-
-  nav ul {
-    flex-direction: column; /* Stack navigation links vertically on smaller screens */
-    text-align: center;
-  }
-
-  nav li {
-    margin-left: 0;
-    margin-bottom: 0.5em;
-  }
-
-  header {
-    flex-direction: column; /* Stack header elements vertically on smaller screens */
-    text-align: center;
-  }
-
-  header h1 {
-    margin-bottom: 0.5em;
-  }
-}
-
-/* Simple Animation Example - Button Hover Effect (if you add buttons) */
-button {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.75em 1.5em;
-  border-radius: 0.25em;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transition for transform and background */
-}
-
-button:hover {
-  background-color: var(--primary-color-darker);
-  transform: scale(1.05); /* Slightly scale up button on hover */
-}
-
-button:active {
-  transform: scale(0.95); /* Slightly scale down button when active/clicked */
-}
-
-/* Utility Classes (Optional, but good practice for reusability) */
-.text-accent {
-  color: var(--accent-color);
-}
-
-.text-light {
-  color: var(--text-color-light);
-}
-
-.bg-light {
-  background-color: #eee;
-}
+    .fade-in.active {  <- JavaScript would add/remove 'active' class on scroll
+        opacity: 1;
+    }
+*/
