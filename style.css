@@ -1,52 +1,175 @@
-/* Custom CSS for GitHub Pages website */
+/* Advanced CSS Example for GitHub Pages Website */
 
-/* Change the font and color of all headings (h1 to h6) */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Arial', sans-serif; /* Use Arial or a generic sans-serif font */
-  color: #333; /* Dark gray color for headings */
+/* CSS Variables for Theming - Reusable Colors and Spacing */
+:root {
+  --primary-color: #007BFF;        /* Main brand color (blue) */
+  --primary-color-darker: #0056b3; /* Darker shade of primary color */
+  --secondary-color: #6c757d;      /* Secondary color (gray) */
+  --background-color: #f8f9fa;     /* Light background color */
+  --text-color-dark: #343a40;       /* Dark text color */
+  --text-color-light: #666;        /* Lighter text color */
+  --accent-color: #ffc107;         /* Accent color (yellow/amber) */
+  --base-font-size: 16px;          /* Base font size for the whole site */
+  --heading-font-size: 2.2em;       /* Larger font size for headings */
+  --spacing-unit: 1.5rem;          /* Base spacing unit */
 }
 
-/* Style for the main heading (h1) specifically */
-h1 {
-  font-size: 2.5em; /* Larger font size */
-  text-align: center; /* Center-align the main heading */
-  margin-bottom: 20px; /* Add some space below the heading */
+/* Reset default browser styles for better consistency */
+*, *::before, *::after {
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  margin: 0;
+  padding: 0;
 }
 
-/* Style for paragraphs */
-p {
-  font-family: 'Georgia', serif; /* Use Georgia or a generic serif font for readability */
-  font-size: 1.1em; /* Slightly larger paragraph font size */
-  line-height: 1.6; /* Increase line height for better readability */
-  color: #555; /* Medium gray color for paragraph text */
+body {
+  font-family: 'Roboto', sans-serif; /* Modern sans-serif font (consider linking to Google Fonts in HTML) */
+  font-size: var(--base-font-size);
+  background-color: var(--background-color);
+  color: var(--text-color-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Improve font rendering on macOS/iOS */
 }
 
-/* Style for links */
-a {
-  color: #007BFF; /* A typical blue color for links */
-  text-decoration: none; /* Remove underline from links */
-}
-
-/* Style for links on hover (when mouse is over them) */
-a:hover {
-  color: #0056b3; /* A darker shade of blue on hover */
-  text-decoration: underline; /* Add underline on hover to indicate interactivity */
-}
-
-/* Example for a container element (like a div) - you might need to adjust this based on your theme's HTML structure */
 .container {
-  max-width: 960px; /* Limit the maximum width of the content */
-  margin: 0 auto; /* Center the container on the page */
-  padding: 20px; /* Add some padding around the content inside the container */
+  max-width: 1200px; /* Wider container for larger screens */
+  margin: 0 auto;
+  padding: var(--spacing-unit);
 }
 
-/* Example for styling a list */
-ul {
-  list-style-type: square; /* Use square bullets for unordered lists */
-  margin-left: 20px; /* Indent the list items */
+/* Header Styling with Flexbox for Layout */
+header {
+  background-color: white;
+  padding: var(--spacing-unit);
+  border-bottom: 1px solid #eee;
+  display: flex; /* Enable Flexbox layout */
+  justify-content: space-between; /* Distribute space between header elements */
+  align-items: center; /* Vertically align items in the center */
 }
 
-ol {
-  list-style-type: decimal; /* Use decimal numbers for ordered lists */
-  margin-left: 20px; /* Indent the list items */
+header h1 {
+  font-size: var(--heading-font-size);
+  color: var(--primary-color);
+}
+
+nav ul {
+  list-style: none;
+  display: flex; /* Flexbox for navigation links */
+}
+
+nav li {
+  margin-left: var(--spacing-unit);
+}
+
+nav a {
+  color: var(--text-color-dark);
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+}
+
+nav a:hover {
+  background-color: var(--primary-color-darker);
+  color: white;
+}
+
+/* Main Content Area with Grid Layout */
+main {
+  padding: var(--spacing-unit);
+  display: grid; /* Enable CSS Grid layout */
+  grid-template-columns: 3fr 1fr; /* 2-column layout: main content (3fr) and sidebar (1fr) */
+  gap: var(--spacing-unit); /* Gap between grid columns and rows */
+}
+
+article {
+  padding: var(--spacing-unit);
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
+}
+
+article h2 {
+  font-size: 1.8em;
+  color: var(--primary-color);
+  margin-bottom: 0.5em;
+}
+
+aside {
+  padding: var(--spacing-unit);
+  background-color: #f0f0f0; /* Light gray sidebar background */
+  border-radius: 0.5em;
+}
+
+aside h3 {
+  font-size: 1.4em;
+  margin-bottom: 0.75em;
+  color: var(--secondary-color);
+}
+
+/* Footer Styling */
+footer {
+  background-color: var(--text-color-dark);
+  color: white;
+  text-align: center;
+  padding: var(--spacing-unit);
+  margin-top: var(--spacing-unit);
+}
+
+/* Responsive Design using Media Queries */
+@media (max-width: 768px) { /* Styles for screens smaller than 768px (e.g., tablets) */
+  main {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens (single column layout) */
+  }
+
+  nav ul {
+    flex-direction: column; /* Stack navigation links vertically on smaller screens */
+    text-align: center;
+  }
+
+  nav li {
+    margin-left: 0;
+    margin-bottom: 0.5em;
+  }
+
+  header {
+    flex-direction: column; /* Stack header elements vertically on smaller screens */
+    text-align: center;
+  }
+
+  header h1 {
+    margin-bottom: 0.5em;
+  }
+}
+
+/* Simple Animation Example - Button Hover Effect (if you add buttons) */
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75em 1.5em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transition for transform and background */
+}
+
+button:hover {
+  background-color: var(--primary-color-darker);
+  transform: scale(1.05); /* Slightly scale up button on hover */
+}
+
+button:active {
+  transform: scale(0.95); /* Slightly scale down button when active/clicked */
+}
+
+/* Utility Classes (Optional, but good practice for reusability) */
+.text-accent {
+  color: var(--accent-color);
+}
+
+.text-light {
+  color: var(--text-color-light);
+}
+
+.bg-light {
+  background-color: #eee;
 }
