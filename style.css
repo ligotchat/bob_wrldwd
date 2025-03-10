@@ -1,0 +1,52 @@
+/* Custom CSS for GitHub Pages website */
+
+/* Change the font and color of all headings (h1 to h6) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Arial', sans-serif; /* Use Arial or a generic sans-serif font */
+  color: #333; /* Dark gray color for headings */
+}
+
+/* Style for the main heading (h1) specifically */
+h1 {
+  font-size: 2.5em; /* Larger font size */
+  text-align: center; /* Center-align the main heading */
+  margin-bottom: 20px; /* Add some space below the heading */
+}
+
+/* Style for paragraphs */
+p {
+  font-family: 'Georgia', serif; /* Use Georgia or a generic serif font for readability */
+  font-size: 1.1em; /* Slightly larger paragraph font size */
+  line-height: 1.6; /* Increase line height for better readability */
+  color: #555; /* Medium gray color for paragraph text */
+}
+
+/* Style for links */
+a {
+  color: #007BFF; /* A typical blue color for links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+/* Style for links on hover (when mouse is over them) */
+a:hover {
+  color: #0056b3; /* A darker shade of blue on hover */
+  text-decoration: underline; /* Add underline on hover to indicate interactivity */
+}
+
+/* Example for a container element (like a div) - you might need to adjust this based on your theme's HTML structure */
+.container {
+  max-width: 960px; /* Limit the maximum width of the content */
+  margin: 0 auto; /* Center the container on the page */
+  padding: 20px; /* Add some padding around the content inside the container */
+}
+
+/* Example for styling a list */
+ul {
+  list-style-type: square; /* Use square bullets for unordered lists */
+  margin-left: 20px; /* Indent the list items */
+}
+
+ol {
+  list-style-type: decimal; /* Use decimal numbers for ordered lists */
+  margin-left: 20px; /* Indent the list items */
+}
