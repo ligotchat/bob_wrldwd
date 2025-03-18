@@ -1,45 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Abstract Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+        
+        :root {
+            --gradient-1: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            --gradient-2: linear-gradient(45deg, #0ea5e9, #10b981, #84cc16);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(236, 72, 153, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.7) 0%, transparent 25%);
+            animation: backgroundShift 20s ease infinite alternate;
+        }
+        
+        @keyframes backgroundShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleColor 8s linear infinite;
+        }
+        
+        @keyframes titleColor {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(60deg); }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        section {
+            margin-bottom: 6rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+        }
+        
+        footer {
+            background-color: rgba(15, 23, 42, 0.9);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--gradient-1);
+        }
+        
+        .abstract-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            z-index: -1;
+        }
+        
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.2);
+            top: -200px;
+            right: -200px;
+        }
+        
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(236, 72, 153, 0.2);
+            bottom: -150px;
+            left: -150px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
 <body>
+    <div class="background-animation"></div>
+    
+    <div class="abstract-shape shape-1"></div>
+    <div class="abstract-shape shape-2"></div>
+    
     <header>
-        <h1>My Website with Squares & Scrolling</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="header-content">
+            <h1>CREATIVE VISION</h1>
+            <p class="subtitle">A showcase of abstract design & modern creativity</p>
+        </div>
     </header>
 
-    <main class="container">
-        <section class="colored-squares-section">
-            <h2>Colored Squares Example</h2>
-            <div class="squares-container">
-                <div class="square square-blue"></div>
-                <div class="square square-red"></div>
-                <div class="square square-green"></div>
-                <div class="square square-yellow"></div>
+    <div class="container">
+        <section>
+            <h2>Featured Works</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Abstract Dimensions</h3>
+                    <p>Exploring the boundaries between digital art and perception through geometric abstractions and color theory.</p>
+                </div>
+                <div class="card">
+                    <h3>Digital Fragments</h3>
+                    <p>A collection of fractured digital compositions that question the relationship between technology and human experience.</p>
+                </div>
+                <div class="card">
+                    <h3>Neural Landscapes</h3>
+                    <p>Generative art pieces that visualize the hidden patterns and connections within complex systems.</p>
+                </div>
             </div>
-            <p>These are colored squares created with CSS. You can customize their colors, sizes, and arrangement.</p>
         </section>
 
-        <article>
-            <h2>Main Content Area</h2>
-            <p>This is the main content of your website.  Scroll down to see more content and examples of interactive scrolling effects.</p>
-            <p>More content... Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... (add more paragraphs of text to make the page scrollable)</p>
-            <p>Even more content...  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ... (add more paragraphs of text to make the page scrollable)</p>
-            <p>Keep scrolling...</p>
-            <p>End of content.</p>
-        </article>
+        <section>
+            <h2>About the Creator</h2>
+            <p>As a digital artist and creative technologist, I explore the intersections of design, technology, and human emotion. My work seeks to challenge conventional perspectives and create immersive experiences that resonate on a deeper level.</p>
+            <p>Through abstract compositions and experimental techniques, I aim to create visual conversations that transcend language and cultural barriers.</p>
+        </section>
 
-        <aside>
-            <h3>Sidebar</h3>
-            <p>This is a sidebar area.</p>
-        </aside>
-    </main>
+        <section>
+            <h2>Connect</h2>
+            <p>I'm always interested in collaborations and new opportunities to push creative boundaries. Reach out if you'd like to discuss a project or just exchange ideas.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">GH</a>
+                <a href="#" class="social-link">TW</a>
+                <a href="#" class="social-link">IG</a>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Creative Vision. All rights reserved.</p>
+        </div>
     </footer>
 </body>
+</html>
