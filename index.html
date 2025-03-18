@@ -18,6 +18,8 @@
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
         }
         
         .header {
@@ -54,16 +56,17 @@
         }
         
         .content {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 10px;
+            position: relative;
+            min-height: 600px;
+            padding: 20px;
         }
         
         .window {
             border: 1px solid #000;
             margin-bottom: 10px;
             overflow: hidden;
+            background-color: #fff;
+            position: absolute;
         }
         
         .window-title {
@@ -97,8 +100,8 @@
             border: 1px solid #000;
             padding: 5px;
             text-align: center;
-            margin-bottom: 10px;
             background-color: #fff;
+            position: absolute;
         }
         
         .image-box img {
@@ -106,29 +109,33 @@
             max-height: 150px;
         }
         
-        .span-2 {
-            grid-column: span 2;
-        }
-        
-        .span-3 {
-            grid-column: span 3;
-        }
-        
         .rainbow {
             background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-            width: 100px;
-            height: 50px;
-            border-radius: 50px 50px 0 0;
-            position: relative;
+            width: 80px;
+            height: 40px;
+            border-radius: 40px 40px 0 0;
+            position: absolute;
+            right: 20px;
+            top: 120px;
+        }
+        
+        .spider {
+            position: absolute;
+            right: 30px;
+            top: 380px;
+            font-size: 30px;
         }
         
         @media (max-width: 600px) {
             .content {
-                grid-template-columns: 1fr;
+                min-height: 1200px;
             }
             
-            .span-2, .span-3 {
-                grid-column: span 1;
+            .image-box, .window {
+                position: relative !important;
+                width: 90% !important;
+                left: 0 !important;
+                margin: 10px auto;
             }
         }
     </style>
@@ -156,24 +163,29 @@
         </div>
         
         <div class="content">
-            <div class="image-box">
-                <img src="/api/placeholder/150/150" alt="Blue wolf character">
+            <!-- Wolf character -->
+            <div class="image-box" style="left: 70px; top: 20px; width: 140px;">
+                <img src="/api/placeholder/140/140" alt="Blue wolf character">
             </div>
             
-            <div class="image-box">
-                <img src="/api/placeholder/150/80" alt="Running wolf">
+            <!-- Running wolf -->
+            <div class="image-box" style="left: 250px; top: 20px; width: 140px;">
+                <img src="/api/placeholder/140/80" alt="Running wolf">
             </div>
             
-            <div class="image-box span-2">
-                <div style="display: flex; justify-content: space-between;">
-                    <img src="/api/placeholder/50/50" alt="orange hooded character" style="height: 50px;">
-                    <img src="/api/placeholder/50/50" alt="leaf" style="height: 50px;">
-                    <div class="rainbow"></div>
-                </div>
-                <img src="/api/placeholder/100/50" alt="car" style="height: 50px; margin-top: 10px;">
+            <!-- Orange character and leaf -->
+            <div class="image-box" style="left: 430px; top: 20px; width: 130px;">
+                <img src="/api/placeholder/50/50" alt="orange hooded character" style="height: 50px;">
+                <img src="/api/placeholder/50/50" alt="leaf" style="height: 50px; margin-left: 10px;">
             </div>
             
-            <div class="window span-2">
+            <!-- Car -->
+            <div class="image-box" style="left: 520px; top: 90px; width: 120px;">
+                <img src="/api/placeholder/120/60" alt="car" style="height: 60px;">
+            </div>
+            
+            <!-- About window -->
+            <div class="window" style="left: 260px; top: 180px; width: 300px;">
                 <div class="window-title">
                     about.txt
                     <div class="window-controls">□×</div>
@@ -187,30 +199,31 @@
                 </div>
             </div>
             
-            <div class="image-box">
-                <img src="/api/placeholder/150/100" alt="anime character" style="height: 100px;">
-            </div>
-            
-            <div class="image-box">
-                <img src="/api/placeholder/150/100" alt="couples therapy" style="height: 100px;">
-                <div>Yeah Yeah Utah</div>
-            </div>
-            
-            <div class="image-box">
-                <img src="/api/placeholder/150/100" alt="hanging item" style="height: 100px;">
-                <div>Warping</div>
-            </div>
-            
-            <div class="image-box">
-                <img src="/api/placeholder/150/100" alt="venom" style="height: 100px;">
-                <div style="background-color: black; color: yellow;">WE'RE VENOM!!!</div>
-            </div>
-            
-            <div class="image-box">
+            <!-- Big anime character -->
+            <div class="image-box" style="left: 70px; top: 380px; width: 200px;">
                 <img src="/api/placeholder/200/100" alt="anime character" style="height: 100px;">
             </div>
             
-            <div class="window span-2">
+            <!-- Couples therapy -->
+            <div class="image-box" style="left: 300px; top: 340px; width: 120px;">
+                <img src="/api/placeholder/120/80" alt="couples therapy" style="height: 80px;">
+                <div style="font-size: 12px;">Yeah Yeah Utah</div>
+            </div>
+            
+            <!-- Hanging item -->
+            <div class="image-box" style="left: 440px; top: 340px; width: 120px; height: 120px;">
+                <img src="/api/placeholder/100/100" alt="hanging item" style="height: 100px;">
+                <div style="font-size: 12px;">Warping</div>
+            </div>
+            
+            <!-- Venom -->
+            <div class="image-box" style="left: 580px; top: 340px; width: 120px;">
+                <img src="/api/placeholder/120/80" alt="venom" style="height: 80px;">
+                <div style="background-color: black; color: yellow; font-size: 12px;">WE'RE VENOM!!!</div>
+            </div>
+            
+            <!-- Likes window -->
+            <div class="window" style="left: 300px; top: 480px; width: 280px;">
                 <div class="window-title">
                     likes.txt
                     <div class="window-controls">□×</div>
@@ -223,7 +236,8 @@
                 </div>
             </div>
             
-            <div class="window">
+            <!-- DHI window -->
+            <div class="window" style="left: 80px; top: 480px; width: 200px;">
                 <div class="window-title">
                     dhi.txt
                     <div class="window-controls">□×</div>
@@ -234,6 +248,12 @@
                     <div class="window-item">NORMIES</div>
                 </div>
             </div>
+            
+            <!-- Rainbow -->
+            <div class="rainbow"></div>
+            
+            <!-- Spider -->
+            <div class="spider">🕷️</div>
         </div>
     </div>
 </body>
