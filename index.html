@@ -129,25 +129,36 @@
             display: inline-block;
         }
         
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        /* Stacked Cards Container */
+        .stacked-cards-container {
+            position: relative;
+            height: 400px;
             margin-top: 3rem;
+            perspective: 1000px;
         }
         
-        .card {
+        /* Stacked Cards */
+        .stacked-card {
+            position: absolute;
+            width: 80%;
+            max-width: 600px;
+            height: 250px;
             background: var(--dark-gray);
             border-radius: 8px;
             padding: 2rem;
-            border: 1px solid var(--primary-red);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
+            border: 2px solid var(--primary-red);
+            transition: transform 0.5s, box-shadow 0.5s, z-index 0s 0.3s;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
+            transform-origin: left center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             cursor: pointer;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
-        .card::before {
+        .stacked-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -157,25 +168,61 @@
             background: var(--gradient-red);
         }
         
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.4);
-        }
-        
-        .card h3 {
+        .stacked-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--primary-red);
         }
         
-        /* Project GIF preview */
+        /* Project identifier */
+        .project-id {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-red);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        /* Project GIF */
         .project-gif {
             width: 100%;
-            height: 150px;
+            height: 100px;
             object-fit: cover;
             border-radius: 4px;
             margin-bottom: 1rem;
             border: 1px solid var(--dark-red);
+        }
+        
+        /* Position each card */
+        #card1 {
+            transform: translateX(-50%) translateY(0);
+            z-index: 3;
+        }
+        
+        #card2 {
+            transform: translateX(-50%) translateY(30px);
+            z-index: 2;
+        }
+        
+        #card3 {
+            transform: translateX(-50%) translateY(60px);
+            z-index: 1;
+        }
+        
+        /* Hover effects for cards */
+        .stacked-card:hover {
+            transform: translateX(-50%) translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(139, 0, 0, 0.6);
+            z-index: 10;
+            transition: transform 0.3s, box-shadow 0.3s, z-index 0s;
         }
         
         footer {
@@ -310,6 +357,22 @@
         #bloodmoon-window { top: 30%; left: 20%; }
         #about-window { top: 15%; left: 25%; }
         
+        /* Button styles */
+        .btn-about {
+            background: var(--dark-red);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: background 0.3s;
+        }
+        
+        .btn-about:hover {
+            background: var(--primary-red);
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -321,6 +384,10 @@
             
             h2 {
                 font-size: 2rem;
+            }
+            
+            .stacked-card {
+                width: 90%;
             }
             
             .draggable-window {
@@ -351,21 +418,24 @@
     <div class="container">
         <section>
             <h2>Featured Projects</h2>
-            <div class="cards-container">
-                <div class="card" data-window="crimson-window">
+            <div class="stacked-cards-container">
+                <div class="stacked-card" id="card1" data-window="crimson-window">
+                    <div class="project-id">P1</div>
                     <img src="https://media.giphy.com/media/3o7aCRZYNerX4ovPwI/giphy.gif" alt="Crimson Echoes" class="project-gif">
                     <h3>Crimson Echoes</h3>
-                    <p>A collection of dark visual experiments exploring the boundaries between light and shadow, focusing on the themes of isolation and transformation.</p>
+                    <p>A collection of dark visual experiments exploring the boundaries between light and shadow.</p>
                 </div>
-                <div class="card" data-window="shadows-window">
+                <div class="stacked-card" id="card2" data-window="shadows-window">
+                    <div class="project-id">P2</div>
                     <img src="https://media.giphy.com/media/l0HlQsW3Z0OnE2KPK/giphy.gif" alt="Shadows Manifest" class="project-gif">
                     <h3>Shadows Manifest</h3>
-                    <p>Exploring the dark recesses of consciousness through abstract digital compositions that blend reality with surreal elements.</p>
+                    <p>Exploring the dark recesses of consciousness through abstract digital compositions.</p>
                 </div>
-                <div class="card" data-window="bloodmoon-window">
+                <div class="stacked-card" id="card3" data-window="bloodmoon-window">
+                    <div class="project-id">P3</div>
                     <img src="https://media.giphy.com/media/TZf4ZyXb0lXXi/giphy.gif" alt="Blood Moon" class="project-gif">
                     <h3>Blood Moon</h3>
-                    <p>A series of nocturnal landscapes illuminated by the deep red glow of a blood moon, capturing moments of eerie tranquility.</p>
+                    <p>A series of nocturnal landscapes illuminated by the deep red glow of a blood moon.</p>
                 </div>
             </div>
         </section>
@@ -481,7 +551,7 @@
             });
             
             // Open window when clicking on a project card
-            $(".card").click(function() {
+            $(".stacked-card").click(function() {
                 const windowId = $(this).data("window");
                 $("#" + windowId).show();
                 // Bring to front
