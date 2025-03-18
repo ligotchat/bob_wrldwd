@@ -3,270 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Abstract Portfolio</title>
+    <title>TOYHONDA - 404 Page Not Found</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
-        
-        :root {
-            --gradient-1: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-            --gradient-2: linear-gradient(45deg, #0ea5e9, #10b981, #84cc16);
-        }
-        
-        * {
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f0f0f0;
+            color: #333;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(236, 72, 153, 0.7) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.7) 0%, transparent 25%),
-                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.7) 0%, transparent 25%);
-            animation: backgroundShift 20s ease infinite alternate;
-        }
-        
-        @keyframes backgroundShift {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-        
-        header {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-content {
-            text-align: center;
-            z-index: 2;
-            padding: 2rem;
-        }
-        
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: titleColor 8s linear infinite;
-        }
-        
-        @keyframes titleColor {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(60deg); }
-        }
-        
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            background-color: #fff;
+            border: 1px solid #000;
         }
         
-        section {
-            margin-bottom: 6rem;
+        .header {
+            display: flex;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #000;
         }
         
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .header-item {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .black-bg {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .error-banner {
+            background-color: #000;
+            color: #aaa;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .star {
+            color: yellow;
             display: inline-block;
+            margin: 0 5px;
         }
         
-        .cards-container {
+        .content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px;
         }
         
-        .card {
-            background: rgba(30, 41, 59, 0.7);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
+        .window {
+            border: 1px solid #000;
+            margin-bottom: 10px;
             overflow: hidden;
         }
         
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-1);
+        .window-title {
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
         }
         
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .window-controls {
+            display: flex;
         }
         
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #f8fafc;
+        .window-content {
+            padding: 5px;
+            background-color: #fff;
         }
         
-        footer {
-            background-color: rgba(15, 23, 42, 0.9);
-            padding: 3rem 0;
+        .window-item {
+            padding: 3px;
+            display: flex;
+        }
+        
+        .window-item:before {
+            content: "► ";
+            margin-right: 5px;
+        }
+        
+        .image-box {
+            border: 1px solid #000;
+            padding: 5px;
             text-align: center;
-            position: relative;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 10px;
+            background-color: #fff;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
+        .image-box img {
+            max-width: 100%;
+            max-height: 150px;
         }
         
-        .social-link {
-            width: 50px;
+        .span-2 {
+            grid-column: span 2;
+        }
+        
+        .span-3 {
+            grid-column: span 3;
+        }
+        
+        .rainbow {
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            width: 100px;
             height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e2e8f0;
-            text-decoration: none;
-            transition: transform 0.3s, background 0.3s;
+            border-radius: 50px 50px 0 0;
+            position: relative;
         }
         
-        .social-link:hover {
-            transform: translateY(-5px);
-            background: var(--gradient-1);
-        }
-        
-        .abstract-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            z-index: -1;
-        }
-        
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(99, 102, 241, 0.2);
-            top: -200px;
-            right: -200px;
-        }
-        
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(236, 72, 153, 0.2);
-            bottom: -150px;
-            left: -150px;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+        @media (max-width: 600px) {
+            .content {
+                grid-template-columns: 1fr;
             }
             
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
+            .span-2, .span-3 {
+                grid-column: span 1;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-animation"></div>
-    
-    <div class="abstract-shape shape-1"></div>
-    <div class="abstract-shape shape-2"></div>
-    
-    <header>
-        <div class="header-content">
-            <h1>CREATIVE VISION</h1>
-            <p class="subtitle">A showcase of abstract design & modern creativity</p>
-        </div>
-    </header>
-
     <div class="container">
-        <section>
-            <h2>Featured Works</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <h3>Abstract Dimensions</h3>
-                    <p>Exploring the boundaries between digital art and perception through geometric abstractions and color theory.</p>
-                </div>
-                <div class="card">
-                    <h3>Digital Fragments</h3>
-                    <p>A collection of fractured digital compositions that question the relationship between technology and human experience.</p>
-                </div>
-                <div class="card">
-                    <h3>Neural Landscapes</h3>
-                    <p>Generative art pieces that visualize the hidden patterns and connections within complex systems.</p>
-                </div>
+        <div class="header">
+            <div class="header-item black-bg" style="flex-grow: 2;">TOYHONDA TOYHONDA</div>
+            <div class="header-item" style="flex-grow: 1; background-color: #ddd;">
+                <img src="/api/placeholder/30/30" alt="anime character" style="width: 30px; height: 30px;">
             </div>
-        </section>
-
-        <section>
-            <h2>About the Creator</h2>
-            <p>As a digital artist and creative technologist, I explore the intersections of design, technology, and human emotion. My work seeks to challenge conventional perspectives and create immersive experiences that resonate on a deeper level.</p>
-            <p>Through abstract compositions and experimental techniques, I aim to create visual conversations that transcend language and cultural barriers.</p>
-        </section>
-
-        <section>
-            <h2>Connect</h2>
-            <p>I'm always interested in collaborations and new opportunities to push creative boundaries. Reach out if you'd like to discuss a project or just exchange ideas.</p>
-            <div class="social-links">
-                <a href="#" class="social-link">GH</a>
-                <a href="#" class="social-link">TW</a>
-                <a href="#" class="social-link">IG</a>
+            <div class="header-item black-bg" style="flex-grow: 1;">
+                <span>⊙</span> <span>♫</span>
             </div>
-        </section>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Creative Vision. All rights reserved.</p>
+            <div class="header-item" style="flex-grow: 2; text-align: left; background-color: white;">
+                TH and SPOTIFY
+            </div>
         </div>
-    </footer>
+        
+        <div class="error-banner">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            404 PAGE NOT FOUND
+        </div>
+        
+        <div class="content">
+            <div class="image-box">
+                <img src="/api/placeholder/150/150" alt="Blue wolf character">
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/150/80" alt="Running wolf">
+            </div>
+            
+            <div class="image-box span-2">
+                <div style="display: flex; justify-content: space-between;">
+                    <img src="/api/placeholder/50/50" alt="orange hooded character" style="height: 50px;">
+                    <img src="/api/placeholder/50/50" alt="leaf" style="height: 50px;">
+                    <div class="rainbow"></div>
+                </div>
+                <img src="/api/placeholder/100/50" alt="car" style="height: 50px; margin-top: 10px;">
+            </div>
+            
+            <div class="window span-2">
+                <div class="window-title">
+                    about.txt
+                    <div class="window-controls">□×</div>
+                </div>
+                <div class="window-content">
+                    <div class="window-item">SALEM</div>
+                    <div class="window-item">HE / HIM</div>
+                    <div class="window-item">2u</div>
+                    <div class="window-item">INUPFAQ</div>
+                    <div class="window-item">TRANS BOY</div>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/150/100" alt="anime character" style="height: 100px;">
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/150/100" alt="couples therapy" style="height: 100px;">
+                <div>Yeah Yeah Utah</div>
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/150/100" alt="hanging item" style="height: 100px;">
+                <div>Warping</div>
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/150/100" alt="venom" style="height: 100px;">
+                <div style="background-color: black; color: yellow;">WE'RE VENOM!!!</div>
+            </div>
+            
+            <div class="image-box">
+                <img src="/api/placeholder/200/100" alt="anime character" style="height: 100px;">
+            </div>
+            
+            <div class="window span-2">
+                <div class="window-title">
+                    likes.txt
+                    <div class="window-controls">□×</div>
+                </div>
+                <div class="window-content">
+                    <div class="window-item">SMOKING WEED</div>
+                    <div class="window-item">BEING A DOG</div>
+                    <div class="window-item">DRAWING BRAIN STUFF</div>
+                    <div class="window-item">CANDIES AND SWEETS</div>
+                </div>
+            </div>
+            
+            <div class="window">
+                <div class="window-title">
+                    dhi.txt
+                    <div class="window-controls">□×</div>
+                </div>
+                <div class="window-content">
+                    <div class="window-item">ZOOS</div>
+                    <div class="window-item">RIGHT WING IDEOLOGIES</div>
+                    <div class="window-item">NORMIES</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
