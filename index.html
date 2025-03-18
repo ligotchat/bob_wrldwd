@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Abstract Portfolio</title>
+    <!-- jQuery and jQuery UI for draggable functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
         
@@ -46,6 +50,20 @@
                 radial-gradient(circle at 85% 30%, rgba(85, 0, 0, 0.7) 0%, transparent 25%),
                 radial-gradient(circle at 50% 80%, rgba(170, 0, 0, 0.7) 0%, transparent 25%);
             animation: backgroundShift 20s ease infinite alternate;
+        }
+        
+        /* GIF background overlay */
+        .gif-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background-size: cover;
+            pointer-events: none;
+            mix-blend-mode: screen;
         }
         
         @keyframes backgroundShift {
@@ -126,6 +144,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .card::before {
@@ -147,6 +166,16 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--primary-red);
+        }
+        
+        /* Project GIF preview */
+        .project-gif {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--dark-red);
         }
         
         footer {
@@ -214,6 +243,73 @@
             letter-spacing: 2px;
         }
         
+        /* Draggable Window Styles */
+        .draggable-window {
+            position: fixed;
+            width: 80%;
+            max-width: 600px;
+            background: var(--dark-gray);
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+            max-height: 80vh;
+        }
+        
+        .window-header {
+            background: var(--dark-red);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            user-select: none;
+        }
+        
+        .window-header h3 {
+            margin: 0;
+            color: var(--white);
+        }
+        
+        .close-window {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .close-window:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .window-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 60px);
+        }
+        
+        .window-content img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        /* Initial positions for windows */
+        #crimson-window { top: 20%; left: 10%; }
+        #shadows-window { top: 25%; left: 15%; }
+        #bloodmoon-window { top: 30%; left: 20%; }
+        #about-window { top: 15%; left: 25%; }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -226,11 +322,20 @@
             h2 {
                 font-size: 2rem;
             }
+            
+            .draggable-window {
+                width: 90%;
+                max-width: none;
+                height: 80%;
+                left: 5% !important;
+                top: 10% !important;
+            }
         }
     </style>
 </head>
 <body>
     <div class="background-animation"></div>
+    <div class="gif-overlay" style="background-image: url('https://media.giphy.com/media/xT8qBfjJhOmNPTVWU0/giphy.gif');"></div>
     
     <div class="abstract-shape shape-1"></div>
     <div class="abstract-shape shape-2"></div>
@@ -247,15 +352,18 @@
         <section>
             <h2>Featured Projects</h2>
             <div class="cards-container">
-                <div class="card">
+                <div class="card" data-window="crimson-window">
+                    <img src="https://media.giphy.com/media/3o7aCRZYNerX4ovPwI/giphy.gif" alt="Crimson Echoes" class="project-gif">
                     <h3>Crimson Echoes</h3>
                     <p>A collection of dark visual experiments exploring the boundaries between light and shadow, focusing on the themes of isolation and transformation.</p>
                 </div>
-                <div class="card">
+                <div class="card" data-window="shadows-window">
+                    <img src="https://media.giphy.com/media/l0HlQsW3Z0OnE2KPK/giphy.gif" alt="Shadows Manifest" class="project-gif">
                     <h3>Shadows Manifest</h3>
                     <p>Exploring the dark recesses of consciousness through abstract digital compositions that blend reality with surreal elements.</p>
                 </div>
-                <div class="card">
+                <div class="card" data-window="bloodmoon-window">
+                    <img src="https://media.giphy.com/media/TZf4ZyXb0lXXi/giphy.gif" alt="Blood Moon" class="project-gif">
                     <h3>Blood Moon</h3>
                     <p>A series of nocturnal landscapes illuminated by the deep red glow of a blood moon, capturing moments of eerie tranquility.</p>
                 </div>
@@ -264,8 +372,8 @@
 
         <section>
             <h2>About Me</h2>
-            <p>I navigate the darkness to find beauty in the shadows. My work explores themes of contrast, isolation, and the thin line between comfort and discomfort. Through a dark red and black palette, I create immersive experiences that challenge perceptions and evoke visceral responses.</p>
-            <p>My artistic philosophy centers around finding meaning in the void, embracing the unknown, and transforming darkness into a canvas for expression.</p>
+            <p>I navigate the darkness to find beauty in the shadows. My work explores themes of contrast, isolation, and the thin line between comfort and discomfort.</p>
+            <p><button class="btn-about" data-window="about-window">Read More</button></p>
         </section>
 
         <section>
@@ -284,5 +392,127 @@
             <p>&copy; 2025 Dark Horizon. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Draggable Windows -->
+    <div class="draggable-window" id="crimson-window">
+        <div class="window-header">
+            <h3>Crimson Echoes</h3>
+            <button class="close-window">×</button>
+        </div>
+        <div class="window-content">
+            <img src="https://media.giphy.com/media/3o7aCRZYNerX4ovPwI/giphy.gif" alt="Crimson Echoes">
+            <h4>Project Overview</h4>
+            <p>Crimson Echoes is an exploration of the boundaries between light and shadow, focusing on themes of isolation and transformation. This series uses deep red tones to invoke feelings of both danger and comfort.</p>
+            <p>Created over a six-month period during my residency in northern Finland, these pieces capture the unique quality of light during the polar winter, when darkness dominates and any light takes on a surreal quality.</p>
+            <h4>Technical Approach</h4>
+            <p>Each piece combines digital photography with custom algorithmic transformations that respond to audio inputs recorded in the same locations. The resulting visuals echo the soundscape of isolation.</p>
+            <h4>Exhibition History</h4>
+            <p>- Dark Matter Gallery, Helsinki (2024)<br>
+            - Digital Dreams Festival, Berlin (2023)<br>
+            - Isolation Exhibition, Online (2023)</p>
+        </div>
+    </div>
+
+    <div class="draggable-window" id="shadows-window">
+        <div class="window-header">
+            <h3>Shadows Manifest</h3>
+            <button class="close-window">×</button>
+        </div>
+        <div class="window-content">
+            <img src="https://media.giphy.com/media/l0HlQsW3Z0OnE2KPK/giphy.gif" alt="Shadows Manifest">
+            <h4>Concept</h4>
+            <p>Shadows Manifest delves into the dark recesses of consciousness, visualizing the abstract forms that emerge when reality blends with the surreal. This ongoing series explores the shadows as entities with their own presence and life.</p>
+            <p>Each piece begins as a documentation of a physical space but evolves through digital manipulation to reveal the hidden emotional landscape that exists parallel to our physical world.</p>
+            <h4>Process</h4>
+            <p>The creation process involves capturing spaces at the threshold between day and night, then applying layers of digital transformation that respond to biometric data collected while in states of deep meditation.</p>
+            <h4>Recognition</h4>
+            <p>This series received the Digital Arts Award at the International New Media Festival and was featured in Dark Arts Quarterly (Issue 14, 2024).</p>
+        </div>
+    </div>
+
+    <div class="draggable-window" id="bloodmoon-window">
+        <div class="window-header">
+            <h3>Blood Moon</h3>
+            <button class="close-window">×</button>
+        </div>
+        <div class="window-content">
+            <img src="https://media.giphy.com/media/TZf4ZyXb0lXXi/giphy.gif" alt="Blood Moon">
+            <h4>The Series</h4>
+            <p>Blood Moon captures nocturnal landscapes illuminated solely by the deep red glow of lunar eclipses. This rare phenomenon transforms familiar environments into alien terrains, creating moments of eerie tranquility.</p>
+            <p>The series spans five years and three continents, documenting blood moon events in remote locations selected for their isolation and unique topography.</p>
+            <h4>Artistic Intent</h4>
+            <p>Through these works, I explore humanity's ancient fascination with celestial events and how they transform our perception of both space and time. The blood moon has been seen as an omen throughout history, and these pieces examine our continuing emotional response to this natural phenomenon.</p>
+            <h4>Publications</h4>
+            <p>Selected works from this series have been published in "Night Visions: Contemporary Nocturnal Photography" (Aperture Press, 2024) and "Red Shift: Modern Interpretations of Celestial Events" (Dark Sky Publishing, 2023).</p>
+        </div>
+    </div>
+
+    <div class="draggable-window" id="about-window">
+        <div class="window-header">
+            <h3>About Me</h3>
+            <button class="close-window">×</button>
+        </div>
+        <div class="window-content">
+            <img src="https://media.giphy.com/media/26BRvIYDoDgXPCrYY/giphy.gif" alt="Artist Portrait">
+            <h4>Artistic Journey</h4>
+            <p>I navigate the darkness to find beauty in the shadows. My work explores themes of contrast, isolation, and the thin line between comfort and discomfort. Through a dark red and black palette, I create immersive experiences that challenge perceptions and evoke visceral responses.</p>
+            <p>My artistic philosophy centers around finding meaning in the void, embracing the unknown, and transforming darkness into a canvas for expression.</p>
+            <h4>Background</h4>
+            <p>With a background in both traditional photography and digital arts, I blend techniques from multiple disciplines to create works that exist in the liminal space between mediums. My formal education in visual anthropology informs my approach to documenting the relationship between humans and darkness.</p>
+            <h4>Influences</h4>
+            <p>My work draws inspiration from the emotional depth of Mark Rothko's color fields, the psychological intensity of Francis Bacon's distortions, and the digital avant-garde experiments of TeamLab. These influences converge in my exploration of digital spaces as emotional landscapes.</p>
+            <h4>Current Focus</h4>
+            <p>I am currently developing new methods for transforming biometric data into visual compositions, allowing the unconscious mind to directly influence the creation process. This research has led to collaborations with neuroscientists and AI researchers interested in visualizing human emotional states.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        $(function() {
+            // Make windows draggable
+            $(".draggable-window").draggable({
+                handle: ".window-header",
+                containment: "window",
+                start: function() {
+                    // Bring to front when starting to drag
+                    $(".draggable-window").css("z-index", 100);
+                    $(this).css("z-index", 101);
+                }
+            });
+            
+            // Open window when clicking on a project card
+            $(".card").click(function() {
+                const windowId = $(this).data("window");
+                $("#" + windowId).show();
+                // Bring to front
+                $(".draggable-window").css("z-index", 100);
+                $("#" + windowId).css("z-index", 101);
+            });
+            
+            // Open about window
+            $(".btn-about").click(function() {
+                const windowId = $(this).data("window");
+                $("#" + windowId).show();
+                // Bring to front
+                $(".draggable-window").css("z-index", 100);
+                $("#" + windowId).css("z-index", 101);
+            });
+            
+            // Close window when clicking the close button
+            $(".close-window").click(function() {
+                $(this).closest(".draggable-window").hide();
+            });
+            
+            // Position windows randomly on page load for visual interest
+            $(".draggable-window").each(function() {
+                const randomTop = Math.floor(Math.random() * 20) + 10; // 10-30%
+                const randomLeft = Math.floor(Math.random() * 40) + 10; // 10-50%
+                $(this).css({
+                    "top": randomTop + "%",
+                    "left": randomLeft + "%"
+                });
+            });
+        });
+    </script>
 </body>
 </html>
