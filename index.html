@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Horizon | Creative Portfolio</title>
+    <title>bob_wrldwd // Y2K Abstractions</title>
     <!-- jQuery and jQuery UI for draggable functionality -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <!-- Font Awesome for better icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Raleway:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Poppins:wght@300;600;800&display=swap');
         
         :root {
-            --primary-red: #8b0000;
-            --dark-red: #550000;
-            --accent-red: #ff0000;
+            --neon-blue: #00ffff;
+            --hot-pink: #ff00ff;
+            --cyber-purple: #8a2be2;
+            --digital-yellow: #ffff00;
+            --electric-green: #00ff00;
             --black: #000000;
-            --dark-gray: #111111;
-            --light-gray: #333333;
+            --dark-blue: #0a0a2a;
+            --light-blue: #add8e6;
             --white: #ffffff;
-            --gradient-dark: linear-gradient(135deg, var(--black), var(--dark-red), var(--black));
-            --gradient-red: linear-gradient(45deg, var(--dark-red), var(--accent-red), var(--dark-red));
-            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --shadow-hard: 0 15px 35px rgba(139, 0, 0, 0.6);
+            --gradient-cyber: linear-gradient(135deg, var(--neon-blue), var(--hot-pink), var(--cyber-purple));
+            --gradient-y2k: linear-gradient(45deg, var(--neon-blue), var(--electric-green), var(--digital-yellow));
         }
         
         * {
@@ -34,8 +32,8 @@
         }
         
         body {
-            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-            background-color: var(--black);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-blue);
             color: var(--white);
             line-height: 1.6;
             overflow-x: hidden;
@@ -48,59 +46,46 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.15;
+            opacity: 0.3;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(139, 0, 0, 0.8) 0%, transparent 30%),
-                radial-gradient(circle at 85% 30%, rgba(85, 0, 0, 0.8) 0%, transparent 30%),
-                radial-gradient(circle at 50% 80%, rgba(170, 0, 0, 0.8) 0%, transparent 30%);
-            animation: backgroundShift 30s ease infinite alternate;
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 255, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 0, 255, 0.7) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(138, 43, 226, 0.7) 0%, transparent 25%);
+            animation: backgroundShift 20s ease infinite alternate;
         }
         
-        .particles {
+        /* Digital noise overlay */
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
         }
         
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: rgba(255, 0, 0, 0.5);
-            border-radius: 50%;
-            animation: float 10s linear infinite;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(20px);
-                opacity: 0;
-            }
+        /* Grid background */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+            background-image: 
+                linear-gradient(to right, var(--neon-blue) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--neon-blue) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
         }
         
         @keyframes backgroundShift {
             0% { background-position: 0% 0%; }
-            50% { background-position: 50% 50%; }
             100% { background-position: 100% 100%; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
         }
         
         header {
@@ -116,39 +101,49 @@
             text-align: center;
             z-index: 2;
             padding: 2rem;
-            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .glitch-container {
+            position: relative;
+            display: inline-block;
         }
         
         h1 {
+            font-family: 'VT323', monospace;
             font-size: 5rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 1rem;
-            background: var(--gradient-red);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: titleGlow 6s ease-in-out infinite;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            color: var(--white);
+            text-shadow: 
+                5px 5px 0 var(--hot-pink),
+                -2px -2px 0 var(--neon-blue);
+            letter-spacing: 3px;
+            animation: textGlitch 3s infinite alternate;
         }
         
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 10px rgba(139, 0, 0, 0.3)); }
-            50% { filter: brightness(1.3) drop-shadow(0 0 20px rgba(139, 0, 0, 0.6)); }
+        @keyframes textGlitch {
+            0%, 80%, 100% {
+                transform: none;
+                opacity: 1;
+            }
+            81%, 83%, 93%, 95% {
+                transform: translate(-2px, 1px);
+                opacity: 0.9;
+            }
+            82%, 84%, 94% {
+                transform: translate(2px, -1px);
+                opacity: 0.8;
+            }
         }
         
         .subtitle {
             font-size: 1.5rem;
             margin-bottom: 2rem;
             font-weight: 300;
-            color: var(--primary-red);
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in-out 0.5s forwards;
+            color: var(--electric-green);
+            font-family: 'VT323', monospace;
+            letter-spacing: 2px;
         }
         
         .container {
@@ -159,261 +154,315 @@
         
         section {
             margin-bottom: 6rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         h2 {
+            font-family: 'VT323', monospace;
             font-size: 2.5rem;
             margin-bottom: 2rem;
-            background: var(--gradient-red);
+            background: var(--gradient-y2k);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* Project Windows */
+        .project-windows {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-window {
+            background: rgba(10, 10, 42, 0.7);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
             position: relative;
         }
         
-        h2::after {
+        .project-window::before {
             content: '';
             position: absolute;
-            bottom: -5px;
+            top: 0;
             left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-        
-        h2:hover::after {
             width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 0, 255, 0.05) 10px, rgba(255, 0, 255, 0.05) 11px);
+            z-index: -1;
+            pointer-events: none;
         }
         
-        /* Stacked Cards Container */
-        .stacked-cards-container {
-            position: relative;
-            height: 450px;
-            margin-top: 3rem;
-            perspective: 1000px;
+        .window-header {
+            background: var(--gradient-cyber);
+            padding: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        /* Stacked Cards */
-        .stacked-card {
-            position: absolute;
+        .window-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .window-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .button-red { background-color: var(--hot-pink); }
+        .button-yellow { background-color: var(--digital-yellow); }
+        .button-green { background-color: var(--electric-green); }
+        
+        .window-title {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-family: 'VT323', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .project-window:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .window-content {
+            padding: 1.5rem;
+        }
+        
+        .project-gif {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid var(--neon-blue);
+            margin-bottom: 1rem;
+            filter: hue-rotate(30deg) saturate(1.5);
+        }
+        
+        .project-window h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--hot-pink);
+            font-family: 'VT323', monospace;
+            letter-spacing: 1px;
+        }
+        
+        .project-window p {
+            color: var(--light-blue);
+            font-size: 0.9rem;
+        }
+        
+        /* Badges */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .badge {
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid var(--cyber-purple);
+            color: var(--electric-green);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'VT323', monospace;
+        }
+        
+        /* Draggable Window Styles */
+        .draggable-window {
+            position: fixed;
             width: 80%;
             max-width: 600px;
-            height: 280px;
-            background: var(--dark-gray);
+            background: rgba(10, 10, 42, 0.85);
+            border: 2px solid var(--neon-blue);
             border-radius: 8px;
-            padding: 2rem;
-            border: 2px solid var(--primary-red);
-            transition: transform 0.5s, box-shadow 0.5s, z-index 0s 0.3s;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            display: none;
             overflow: hidden;
-            transform-origin: left center;
-            box-shadow: var(--shadow-soft);
-            cursor: pointer;
-            left: 50%;
-            transform: translateX(-50%);
+            max-height: 80vh;
+            backdrop-filter: blur(10px);
         }
         
-        .stacked-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-red);
-        }
-        
-        .stacked-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 30%;
-            height: 2px;
-            background: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-        
-        .stacked-card:hover::after {
-            width: 100%;
-        }
-        
-        .stacked-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-red);
-            transition: color 0.3s ease;
-        }
-        
-        .stacked-card:hover h3 {
-            color: var(--accent-red);
-        }
-        
-        /* Project identifier */
-        .project-id {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--primary-red);
-            color: var(--white);
-            width: 30px;
-            height: 30px;
+        .modal-window-header {
+            background: var(--gradient-cyber);
+            padding: 1rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: move;
+            user-select: none;
         }
         
-        .stacked-card:hover .project-id {
-            transform: scale(1.1);
-            background: var(--accent-red);
+        .modal-window-header h3 {
+            margin: 0;
+            color: var(--white);
+            font-family: 'VT323', monospace;
+            letter-spacing: 2px;
         }
         
-        /* Project Image */
-        .project-image {
+        .window-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .window-control {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .close-btn { background-color: var(--hot-pink); }
+        .minimize-btn { background-color: var(--digital-yellow); }
+        .maximize-btn { background-color: var(--electric-green); }
+        
+        .modal-window-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 60px);
+        }
+        
+        .modal-window-content img {
             width: 100%;
-            height: 120px;
-            object-fit: cover;
             border-radius: 4px;
             margin-bottom: 1rem;
-            border: 1px solid var(--dark-red);
-            transition: transform 0.3s ease;
-            background-color: var(--dark-red);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--neon-blue);
+            filter: hue-rotate(30deg) saturate(1.5);
         }
         
-        .project-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 50%, rgba(139, 0, 0, 0.8) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(85, 0, 0, 0.8) 0%, transparent 40%);
-            animation: imagePulse 8s infinite alternate;
-        }
-        
-        @keyframes imagePulse {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-        
-        .stacked-card:hover .project-image {
-            transform: scale(1.05);
-        }
-        
-        /* Position each card */
-        #card1 {
-            transform: translateX(-50%) translateY(0);
-            z-index: 3;
-        }
-        
-        #card2 {
-            transform: translateX(-50%) translateY(40px);
-            z-index: 2;
-        }
-        
-        #card3 {
-            transform: translateX(-50%) translateY(80px);
-            z-index: 1;
-        }
-        
-        /* Hover effects for cards */
-        .stacked-card:hover {
-            transform: translateX(-50%) translateY(-15px) scale(1.05);
-            box-shadow: var(--shadow-hard);
-            z-index: 10;
-            transition: transform 0.3s, box-shadow 0.3s, z-index 0s;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-text {
-            padding: 2rem;
-            background: rgba(17, 17, 17, 0.7);
-            border-radius: 8px;
-            border-left: 3px solid var(--primary-red);
-        }
-        
-        .about-image {
-            height: 300px;
-            background: 
-                radial-gradient(circle at 30% 50%, rgba(139, 0, 0, 0.8) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(85, 0, 0, 0.8) 0%, transparent 40%);
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            animation: imagePulse 8s infinite alternate;
-        }
-        
-        .btn-about {
-            background: var(--dark-red);
-            color: var(--white);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            transition: background 0.3s, transform 0.3s;
-            font-weight: 600;
+        .modal-window-content h4 {
+            color: var(--neon-blue);
             margin-top: 1.5rem;
-            display: inline-block;
-            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: 'VT323', monospace;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            text-transform: uppercase;
         }
         
-        .btn-about::before {
+        /* Initial positions for windows */
+        #project1-window { top: 20%; left: 10%; }
+        #project2-window { top: 25%; left: 15%; }
+        #project3-window { top: 30%; left: 20%; }
+        #about-window { top: 15%; left: 25%; }
+        
+        /* Button styles */
+        .btn-y2k {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--hot-pink);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .btn-y2k::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.4), transparent);
+            transition: all 0.4s;
         }
         
-        .btn-about:hover {
-            background: var(--primary-red);
+        .btn-y2k:hover {
+            box-shadow: 0 0 15px var(--hot-pink);
+            background: rgba(255, 0, 255, 0.1);
             transform: translateY(-3px);
         }
         
-        .btn-about:hover::before {
+        .btn-y2k:hover::before {
             left: 100%;
         }
         
-        footer {
-            background-color: var(--dark-gray);
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-            border-top: 1px solid var(--primary-red);
+        /* About section */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
         }
         
+        .about-image {
+            position: relative;
+            border: 2px solid var(--hot-pink);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            display: block;
+            filter: hue-rotate(30deg) saturate(1.5);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), transparent);
+            z-index: 1;
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+        
+        /* Status bar */
+        .status-bar {
+            background: var(--black);
+            border-top: 1px solid var(--neon-blue);
+            padding: 0.5rem 1rem;
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .status-bar-left {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        /* Social links */
         .social-links {
             display: flex;
             justify-content: center;
@@ -428,348 +477,139 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--dark-gray);
-            border: 1px solid var(--primary-red);
+            background: transparent;
+            border: 2px solid var(--neon-blue);
             color: var(--white);
             text-decoration: none;
-            transition: transform 0.3s, background 0.3s;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-5px);
-            background: var(--primary-red);
-        }
-        
-        .abstract-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            z-index: -1;
-        }
-        
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(139, 0, 0, 0.2);
-            top: -200px;
-            right: -200px;
-            animation: pulse 15s infinite alternate;
-        }
-        
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(85, 0, 0, 0.2);
-            bottom: -150px;
-            left: -150px;
-            animation: pulse 20s infinite alternate-reverse;
-        }
-        
-        .name {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            color: var(--primary-red);
-            font-weight: 700;
-            letter-spacing: 4px;
+            transition: all 0.3s;
             position: relative;
-            display: inline-block;
-        }
-        
-        .name::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-        
-        .name:hover::after {
-            width: 100%;
-        }
-        
-        /* Draggable Window Styles */
-        .draggable-window {
-            position: fixed;
-            width: 80%;
-            max-width: 700px;
-            background: var(--dark-gray);
-            border: 2px solid var(--primary-red);
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            z-index: 100;
-            display: none;
             overflow: hidden;
-            max-height: 80vh;
-            transform: scale(0.95);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
         }
         
-        .draggable-window.active {
-            transform: scale(1);
-            opacity: 1;
-        }
-        
-        .window-header {
-            background: var(--dark-red);
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-            user-select: none;
-        }
-        
-        .window-header h3 {
-            margin: 0;
-            color: var(--white);
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        
-        .window-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .window-control {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1rem;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-        
-        .window-control:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .window-content {
-            padding: 1.5rem;
-            overflow-y: auto;
-            max-height: calc(80vh - 60px);
-        }
-        
-        .window-content img {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid var(--dark-red);
-            height: 200px;
-            object-fit: cover;
-            background-color: var(--dark-red);
-            position: relative;
-        }
-        
-        .window-content img::before {
+        .social-link::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 50%, rgba(139, 0, 0, 0.8) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(85, 0, 0, 0.8) 0%, transparent 40%);
-        }
-        
-        .window-content h4 {
-            color: var(--primary-red);
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
-            padding-bottom: 0.5rem;
-        }
-        
-        .window-content p {
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-        
-        /* Scroll down indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-            opacity: 0.7;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--neon-blue), transparent);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
             transition: opacity 0.3s;
         }
         
-        .scroll-down:hover {
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .social-link:hover {
+            color: var(--black);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.4);
+        }
+        
+        .social-link:hover::before {
             opacity: 1;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-        
-        /* Navigation */
-        .nav-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 40px;
-            height: 40px;
-            background: var(--dark-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .nav-toggle:hover {
-            background: var(--primary-red);
-        }
-        
-        .nav-toggle span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--white);
-            position: relative;
-            transition: background 0.3s;
-        }
-        
-        .nav-toggle span::before,
-        .nav-toggle span::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 2px;
-            background: var(--white);
-            transition: all 0.3s;
-        }
-        
-        .nav-toggle span::before {
-            top: -6px;
-        }
-        
-        .nav-toggle span::after {
-            bottom: -6px;
-        }
-        
-        .nav-toggle.active span {
-            background: transparent;
-        }
-        
-        .nav-toggle.active span::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-        
-        .nav-toggle.active span::after {
-            bottom: 0;
-            transform: rotate(-45deg);
-        }
-        
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: var(--dark-gray);
-            z-index: 999;
-            padding: 80px 2rem 2rem;
-            transition: right 0.5s;
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
-            border-left: 1px solid var(--primary-red);
-        }
-        
-        .nav-menu.active {
-            right: 0;
-        }
-        
-        .nav-menu ul {
-            list-style: none;
-        }
-        
-        .nav-menu li {
-            margin-bottom: 1.5rem;
-        }
-        
-        .nav-menu a {
-            color: var(--white);
-            text-decoration: none;
+        .social-link span {
+            z-index: 1;
+            font-family: 'VT323', monospace;
             font-size: 1.2rem;
-            position: relative;
-            padding-left: 15px;
-            transition: color 0.3s;
         }
         
-        .nav-menu a::before {
-            content: '';
+        footer {
+            background-color: rgba(10, 10, 42, 0.8);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid var(--neon-blue);
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            font-family: 'VT323', monospace;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 
+                2px 2px 0 var(--hot-pink),
+                -1px -1px 0 var(--neon-blue);
+        }
+        
+        .footer-text {
+            color: var(--light-blue);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Y2K Decorative elements */
+        .y2k-shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .cyber-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-blue);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .cyber-square {
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--hot-pink);
+            transform: rotate(45deg);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        .cyber-triangle {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 250px solid rgba(138, 43, 226, 0.1);
             position: absolute;
             top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            background: var(--primary-red);
-            border-radius: 50%;
-            transition: background 0.3s, transform 0.3s;
+            left: 70%;
         }
         
-        .nav-menu a:hover {
-            color: var(--primary-red);
+        /* Digital timer */
+        #digital-time {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--neon-blue);
         }
         
-        .nav-menu a:hover::before {
-            background: var(--accent-red);
-            transform: translateY(-50%) scale(1.5);
+        .name {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            background: var(--gradient-y2k);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
         
-        .nav-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        
-        .nav-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        /* Mobile styles */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             .subtitle {
@@ -780,143 +620,187 @@
                 font-size: 2rem;
             }
             
-            .stacked-card {
-                width: 95%;
-                height: auto;
-                min-height: 280px;
-            }
-            
-            .stacked-cards-container {
-                height: 520px;
-            }
-            
-            .about-content {
+            .about-container {
                 grid-template-columns: 1fr;
             }
             
-            .about-image {
-                height: 200px;
-            }
-            
             .draggable-window {
-                width: 95%;
-                max-width: none;
-                height: auto;
-                max-height: 90vh;
-                left: 2.5% !important;
-                top: 5% !important;
+                width: 90%;
+                left: 5% !important;
+                top: 10% !important;
             }
             
-            .window-content {
-                max-height: calc(90vh - 60px);
-            }
-            
-            .nav-menu {
-                width: 80%;
-                right: -80%;
+            .project-windows {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="background-animation"></div>
-    <div class="particles" id="particles"></div>
+    <div class="noise-overlay"></div>
+    <div class="grid-overlay"></div>
     
-    <div class="abstract-shape shape-1"></div>
-    <div class="abstract-shape shape-2"></div>
+    <div class="y2k-shape cyber-circle"></div>
+    <div class="y2k-shape cyber-square"></div>
+    <div class="y2k-shape cyber-triangle"></div>
     
-    <!-- Navigation -->
-    <div class="nav-toggle">
-        <span></span>
-    </div>
-    
-    <div class="nav-menu">
-        <ul>
-            <li><a href="#header">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#connect">Connect</a></li>
-        </ul>
-    </div>
-    
-    <div class="nav-overlay"></div>
-    
-    <header id="header">
+    <header>
         <div class="header-content">
-            <h1>DARK HORIZON</h1>
-            <p class="subtitle">A journey through shadows and crimson dreams</p>
-            <div class="name">ALEXANDER NOIR</div>
-        </div>
-        <div class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
+            <div class="glitch-container">
+                <h1>bob_wrldwd</h1>
+            </div>
+            <p class="subtitle">digital cyberspace explorations</p>
+            <div class="name">creating since 2000.exe</div>
         </div>
     </header>
 
     <div class="container">
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div class="stacked-cards-container">
-                <div class="stacked-card" id="card1" data-window="crimson-window">
-                    <div class="project-id">01</div>
-                    <div class="project-image"></div>
-                    <h3>Crimson Echoes</h3>
-                    <p>A collection of dark visual experiments exploring the boundaries between light and shadow.</p>
+        <section>
+            <h2>// Latest Projects</h2>
+            <div class="project-windows">
+                <div class="project-window" data-window="project1-window">
+                    <div class="window-header">
+                        <div class="window-buttons">
+                            <div class="window-button button-red"></div>
+                            <div class="window-button button-yellow"></div>
+                            <div class="window-button button-green"></div>
+                        </div>
+                        <div class="window-title">hyperspace.exe</div>
+                    </div>
+                    <div class="window-content">
+                        <img src="https://media.giphy.com/media/3o7aCRZYNerX4ovPwI/giphy.gif" alt="Hyperspace" class="project-gif">
+                        <h3>hyperspace_glitch</h3>
+                        <p>A digital series exploring virtual dimensions and the aesthetics of system failure.</p>
+                        <div class="tech-badges">
+                            <span class="badge">WebGL</span>
+                            <span class="badge">Processing</span>
+                            <span class="badge">A.I.</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stacked-card" id="card2" data-window="shadows-window">
-                    <div class="project-id">02</div>
-                    <div class="project-image"></div>
-                    <h3>Shadows Manifest</h3>
-                    <p>Exploring the dark recesses of consciousness through abstract digital compositions.</p>
+                
+                <div class="project-window" data-window="project2-window">
+                    <div class="window-header">
+                        <div class="window-buttons">
+                            <div class="window-button button-red"></div>
+                            <div class="window-button button-yellow"></div>
+                            <div class="window-button button-green"></div>
+                        </div>
+                        <div class="window-title">neoncity.sys</div>
+                    </div>
+                    <div class="window-content">
+                        <img src="https://media.giphy.com/media/l0HlQsW3Z0OnE2KPK/giphy.gif" alt="Neon City" class="project-gif">
+                        <h3>n30n_c1ty</h3>
+                        <p>Virtual landscapes drawn from digital dreams and the nostalgic futurism of the early web.</p>
+                        <div class="tech-badges">
+                            <span class="badge">ThreeJS</span>
+                            <span class="badge">Blender</span>
+                            <span class="badge">JavaScript</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stacked-card" id="card3" data-window="bloodmoon-window">
-                    <div class="project-id">03</div>
-                    <div class="project-image"></div>
-                    <h3>Blood Moon</h3>
-                    <p>A series of nocturnal landscapes illuminated by the deep red glow of a blood moon.</p>
+                
+                <div class="project-window" data-window="project3-window">
+                    <div class="window-header">
+                        <div class="window-buttons">
+                            <div class="window-button button-red"></div>
+                            <div class="window-button button-yellow"></div>
+                            <div class="window-button button-green"></div>
+                        </div>
+                        <div class="window-title">retrogrid.net</div>
+                    </div>
+                    <div class="window-content">
+                        <img src="https://media.giphy.com/media/TZf4ZyXb0lXXi/giphy.gif" alt="Retrogrid" class="project-gif">
+                        <h3>retro_grid::404</h3>
+                        <p>Revisiting the visual language of early digital spaces through a modern cyberpunk lens.</p>
+                        <div class="tech-badges">
+                            <span class="badge">CSS3</span>
+                            <span class="badge">After Effects</span>
+                            <span class="badge">WebGL</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I navigate the darkness to find beauty in the shadows. My work explores themes of contrast, isolation, and the thin line between comfort and discomfort.</p>
-                    <p>Through a dark red and black palette, I create immersive experiences that challenge perceptions and evoke visceral responses.</p>
-                    <button class="btn-about" data-window="about-window">Read More</button>
+        <section>
+            <h2>// About Me</h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="https://media.giphy.com/media/26BRvIYDoDgXPCrYY/giphy.gif" alt="bob_wrldwd">
                 </div>
-                <div class="about-image"></div>
+                <div class="about-content">
+                    <p>I create at the intersection of nostalgia and digital futurism, drawing inspiration from the early web aesthetics, classic video games, and the promise of cyberspace from the Y2K era.</p>
+                    <p>My work explores the glitches, imperfections, and unique visual language that emerged as humans first began building digital worlds.</p>
+                    <p>Using a combination of modern and obsolete technologies, I create spaces that feel both familiar and alien—digital environments that could have existed in an alternate timeline where the internet evolved differently.</p>
+                    <button class="btn-y2k" data-window="about-window">load_more.exe</button>
+                </div>
             </div>
         </section>
 
-        <section id="connect">
-            <h2>Connect</h2>
-            <p>If you're drawn to the shadows, let's collaborate. I'm always looking for kindred spirits who understand that true depth comes from exploring both light and darkness.</p>
+        <section>
+            <h2>// Connect</h2>
+            <p>Join me in the digital realm. Available for collaborative projects and commissions that explore the nostalgic future we were promised.</p>
             <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                <a href="#" class="social-link"><span>GH</span></a>
+                <a href="#" class="social-link"><span>TW</span></a>
+                <a href="#" class="social-link"><span>IG</span></a>
             </div>
         </section>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dark Horizon. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Draggable Windows -->
-    <div class="draggable-window" id="crimson-window">
-        <div class="window-header">
-            <h3>Crimson Echoes</h3>
-            <div class="window-controls">
-                <button class="window-control minimize-window"><i class="fas fa-minus"></i></button>
-                <button class="window-control close-window"><i class="fas fa-times"></i></button>
+            <div class="footer-content">
+                <div class="footer-logo">bob_wrldwd</div>
+                <p class="footer-text">Living in the digital space between what was and what could have been.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><span>GH</span></a>
+                    <a href="#" class="social-link"><span>TW</span></a>
+                    <a href="#" class="social-link"><span>IG</span></a>
+                </div>
             </div>
         </div>
-        <div class="window-content">
-            <div class="project-image"></div>
+    </footer>
+    
+    <div class="status-bar">
+        <div class="status-bar-left">
+            <div class="status-item"><span>bob_wrldwd.exe</span></div>
+            <div class="status-item"><span>cpu: 42%</span></div>
+        </div>
+        <div id="digital-time">00:00:00</div>
+    </div>
+
+    <!-- Draggable Windows -->
+    <div class="draggable-window" id="project1-window">
+        <div class="modal-window-header">
+            <h3>hyperspace_glitch</h3>
+            <div class="window-controls">
+                <div class="window-control minimize-btn"></div>
+                <div class="window-control maximize-btn"></div>
+                <div class="window-control close-btn"></div>
+            </div>
+        </div>
+        <div class="modal-window-content">
+            <img src="https://media.giphy.com/media/3o7aCRZYNerX4ovPwI/giphy.gif" alt="Hyperspace">
             <h4>Project Overview</h4>
-            <p>
+            <p>hyperspace_glitch explores the aesthetic possibilities of digital errors, data corruption, and system failures. This series treats glitches not as mistakes but as doorways to new visual dimensions.</p>
+            <p>Created during a 72-hour digital art hackathon, these pieces emerge from custom algorithms that intentionally misuse rendering pipelines to produce beautiful accidents.</p>
+            <h4>Technical Approach</h4>
+            <p>Each piece begins with pristine 3D models that are progressively corrupted through custom WebGL shaders. The visual language draws from early video game graphics, VHS artifacts, and the unique aesthetics of various system crashes.</p>
+            <p>Audio elements are generated by converting visual data into sound waves, creating a synesthetic experience where what you see and hear are different expressions of the same digital information.</p>
+            <h4>Exhibition History</h4>
+            <p>- Virtual Reality Gallery, CyberFest 2024<br>
+            - Glitch Art Showcase, Tokyo (2024)<br>
+            - "The Beautiful Crash" Online Exhibition (2023)</p>
+        </div>
+    </div>
+
+    <div class="draggable-window" id="project2-window">
+        <div class="modal-window-header">
+            <h3>n30n_c1ty</h3>
+            <div class="window-controls">
+                <div class="window-control minimize-btn"></div>
+                <div class="window-control maximize-btn"></div>
+                <div class="window-control close-btn"></div>
